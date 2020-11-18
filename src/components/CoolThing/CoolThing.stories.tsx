@@ -1,11 +1,7 @@
 import React from 'react'
 import { Meta, Story } from '@storybook/react'
-import { CoolThing, CoolThingProps } from '../../index'
+import { CoolThing, CoolThingProps } from '@src/index'
 
-// const props = (): CoolThingProps => ({
-//   onClick: action('onClick'),
-//   cursorAuto: boolean('cursorAuto', false),
-// })
 const meta: Meta = {
   title: 'CoolThing',
   component: CoolThing,

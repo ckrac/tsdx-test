@@ -1,10 +1,15 @@
 const path = require('path')
+const { TsconfigPathsPlugin } = require('tsconfig-paths-webpack-plugin')
 
 module.exports = {
   stories: ['../src/**/*.stories.tsx'],
   // Add any Storybook addons you want here: https://storybook.js.org/addons/
   addons: ['@storybook/addon-links', '@storybook/addon-essentials'],
   webpackFinal: async config => {
+    config.resolve.plugins = [
+      new TsconfigPathsPlugin({ extensions: config.resolve.extensions }),
+    ]
+
     config.module.rules.push({
       test: /\.scss$/,
       use: ['style-loader', 'css-loader', 'sass-loader'],
