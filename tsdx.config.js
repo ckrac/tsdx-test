@@ -3,11 +3,13 @@ const autoprefixer = require('autoprefixer');
 const cssnano = require('cssnano');
 const copy = require('rollup-plugin-copy');
 const alias = require('rollup-plugin-alias');
+const typescript = require('rollup-plugin-typescript2');
 
 module.exports = {
   rollup(config, options) {
     config.plugins = [
       ...config.plugins,
+      ,
       postcss({
         plugins: [
           autoprefixer(),
@@ -30,7 +32,16 @@ module.exports = {
       }),
       alias({
         resolve: ['.jsx', '.js', '.ts', '.tsx'],
-        entries: [{ find: '@src', replacement: './src/*' }],
+        entries: [
+          {
+            find: '@src/*',
+            replacement: './src',
+          },
+        ],
+      }),
+      // required to transform alias imports in d.ts files
+      typescript({
+        typescript: require('ttypescript'),
       }),
     ]
     return config;
